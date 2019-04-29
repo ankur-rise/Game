@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="block_height_normal">50dp</dimen>
+    <dimen name="margin_parent">15dp</dimen>
+    <dimen name="padding_parent">16dp</dimen>
+    <dimen name="text_large">18sp</dimen>
+</resources>
