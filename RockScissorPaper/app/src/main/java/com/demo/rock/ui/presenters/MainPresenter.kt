@@ -7,6 +7,6 @@ import javax.inject.Inject
 class MainPresenter @Inject constructor() : BasePresenter<MainContract.View>() {
 
     override fun start() {
-        mView!!.message("tested")
+
     }
 }
