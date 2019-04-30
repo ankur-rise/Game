@@ -3,4 +3,7 @@
     <string name="player_computer">Player VS Computer</string>
     <string name="computer_computer">Computer VS Computer</string>
     <string name="select_play_mode">Select play mode</string>
+    <string name="computer">Computer</string>
+    <string name="player">Player</string>
+    <string name="choose_your_move">Choose your move</string>
 </resources>
