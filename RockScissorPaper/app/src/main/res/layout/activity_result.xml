@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.view.ResultActivity"
+        android:padding="@dimen/padding_parent"
+        android:background="@color/colorPrimary"
+>
+    <ImageView android:layout_width="100dp"
+               android:layout_height="100dp"
+               android:src="@drawable/scissor"
+               android:scaleType="fitXY"
+               android:layout_centerHorizontal="true"
+               android:layout_marginTop="@dimen/margin_40"
+               android:id="@+id/iv_move_1"/>
+
+    <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textSize="@dimen/text_xlarge"
+              android:textColor="@android:color/white"
+              android:id="@+id/tv_result"
+              android:layout_centerHorizontal="true"
+              android:layout_marginBottom="@dimen/margin_10"
+              android:layout_above="@+id/ll_btns"
+              android:text="You win!"/>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:layout_centerInParent="true"
+                  android:id="@+id/ll_btns"
+    >
+        <Button android:layout_width="0dp" android:layout_height="60dp"
+                android:layout_weight="1"
+                android:background="@color/colorAccent"
+                android:textColor="@color/black"
+                android:layout_marginRight="@dimen/margin_5"
+                android:text="@string/play_again"
+                android:id="@+id/btn_play"/>
+
+        <Button android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:background="@color/colorAccent"
+                android:textColor="@color/black"
+                android:layout_marginLeft="@dimen/margin_5"
+                android:text="@string/change_mode"
+                android:id="@+id/btn_change_mode"/>
+    </LinearLayout>
+
+
+    <ImageView android:layout_width="100dp"
+               android:layout_height="100dp"
+               android:src="@drawable/rock"
+               android:scaleType="fitXY"
+               android:layout_centerHorizontal="true"
+               android:layout_alignParentBottom="true"
+               android:layout_marginBottom="@dimen/margin_40"
+               android:id="@+id/iv_move_2"/>
+
+</RelativeLayout>

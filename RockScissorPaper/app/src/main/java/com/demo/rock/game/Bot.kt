@@ -6,6 +6,9 @@ import android.os.Looper
 
 /** This class instance will work as separate computer player */
 class Bot : IBot {
+    override fun clear() {
+        mHandlerThread.quitSafely()
+    }
 
     companion object {
         fun getInstance(): IBot {
@@ -18,16 +21,16 @@ class Bot : IBot {
     val mMainHandler = Handler(Looper.getMainLooper())
 
     init {
-        mWorkerHandler = Handler(mHandlerThread.looper)
         mHandlerThread.start()
+        mWorkerHandler = Handler(mHandlerThread.looper)
     }
 
 
     override fun getAction(callback: IBot.Callback) {
-        mWorkerHandler.postAtTime({
+        mWorkerHandler.postDelayed({
             val action = getAction(getRandomIndex())
             mMainHandler.post { callback.onAction(action) }
-        }, 1500)
+        }, 3000)
 
     }
 

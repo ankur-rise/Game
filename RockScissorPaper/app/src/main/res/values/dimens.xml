@@ -4,4 +4,8 @@
     <dimen name="margin_parent">15dp</dimen>
     <dimen name="padding_parent">16dp</dimen>
     <dimen name="text_large">18sp</dimen>
+    <dimen name="margin_5">5dp</dimen>
+    <dimen name="text_xlarge">35sp</dimen>
+    <dimen name="margin_40">40dp</dimen>
+    <dimen name="margin_10">10dp</dimen>
 </resources>

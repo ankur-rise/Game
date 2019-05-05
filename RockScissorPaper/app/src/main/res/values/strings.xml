@@ -6,4 +6,8 @@
     <string name="computer">Computer</string>
     <string name="player">Player</string>
     <string name="choose_your_move">Choose your move</string>
+    <string name="computer_1">Computer 1</string>
+    <string name="computer_2">Computer 2</string>
+    <string name="play_again">Play again!</string>
+    <string name="change_mode">Change mode</string>
 </resources>

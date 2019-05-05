@@ -1,90 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.view.GameActivity"
-        android:padding="@dimen/padding_parent"
-        android:background="@color/colorPrimary">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_height="match_parent"
+             android:layout_width="match_parent">
+    <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ui.view.GameActivity"
+            android:padding="@dimen/padding_parent"
+            android:background="@color/colorPrimary">
 
-    <LinearLayout android:layout_width="150dp"
-                  android:id="@+id/ll_circle"
-                  android:layout_height="150dp"
-                  android:layout_centerHorizontal="true"
-                  android:layout_marginTop="50dp"
+        <LinearLayout android:layout_width="150dp"
+                      android:id="@+id/ll_circle"
+                      android:layout_height="150dp"
+                      android:layout_centerHorizontal="true"
+                      android:layout_marginTop="50dp"
+                      android:orientation="vertical"
+                      android:gravity="center"
+                      android:background="@drawable/white_circle">
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="5 \n timer"
+                      android:gravity="center"
+                      android:textSize="25sp"
+                      android:textColor="@android:color/white"
+            />
+        </LinearLayout>
+
+        <TextView android:id="@+id/tv_player_1"
+                  android:layout_width="match_parent"
+                  android:layout_height="50dp"
+                  android:gravity="center"
+                  android:layout_below="@id/ll_circle"
+                  android:textSize="25sp"
+                  android:textColor="@android:color/black"
+                  android:text="@string/computer"
+                  android:layout_marginTop="30dp"/>
+
+        <View
+                android:id="@+id/view_line"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/white"
+                android:layout_below="@id/tv_player_1"/>
+
+        <TextView android:layout_width="match_parent"
+                  android:id="@+id/tv_player_2"
+                  android:layout_height="50dp"
+                  android:gravity="center"
+                  android:layout_below="@id/view_line"
+                  android:textSize="25sp"
+                  android:textColor="@android:color/black"
+                  android:text="@string/player"
+                  android:layout_marginTop="10dp"
+        />
+
+
+        <TextView
+                android:id="@+id/tv_human_move"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/ll_btm"
+                android:text="@string/choose_your_move"
+                android:textSize="25sp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="20dp"
+                android:textColor="@android:color/white"/>
+
+        <LinearLayout
+                android:id="@+id/ll_btm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/padding_parent"
+                android:layout_alignParentBottom="true">
+            <ImageView android:layout_width="0dp"
+                       android:layout_weight="1"
+                       android:layout_height="70dp"
+                       android:src="@drawable/rock"
+                       android:id="@+id/iv_rock"
+            />
+            <ImageView android:layout_width="0dp"
+                       android:layout_weight="1"
+                       android:layout_height="70dp"
+                       android:src="@drawable/paper"
+                       android:id="@+id/iv_paper"/>
+            <ImageView android:layout_width="0dp"
+                       android:layout_weight="1"
+                       android:layout_height="70dp"
+                       android:src="@drawable/scissor"
+                       android:id="@+id/iv_scissor"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:background="@color/transparent_black"
+                  android:clickable="true"
                   android:orientation="vertical"
                   android:gravity="center"
-                  android:background="@drawable/white_circle">
+                  android:visibility="gone"
+                  android:id="@+id/ll_progress">
+        <ProgressBar android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:id="@+id/progress_bar"
+                     style="?android:attr/progressBarStyleLarge"
+                     android:indeterminate="true"
+        />
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="5 \n timer"
-                  android:gravity="center"
-                  android:textSize="25sp"
+                  android:id="@+id/tv_progress_msg"
+                  android:textSize="@dimen/text_large"
                   android:textColor="@android:color/white"
-        />
+                  android:layout_marginTop="@dimen/margin_5"
+                  />
     </LinearLayout>
-
-    <TextView android:id="@+id/tv_player_1"
-              android:layout_width="match_parent"
-              android:layout_height="50dp"
-              android:gravity="center"
-              android:layout_below="@id/ll_circle"
-              android:textSize="25sp"
-              android:textColor="@android:color/black"
-              android:text="@string/computer"
-              android:layout_marginTop="30dp"/>
-
-    <View
-            android:id="@+id/view_line"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="10dp"
-            android:background="@android:color/white"
-            android:layout_below="@id/tv_player_1"/>
-
-    <TextView android:layout_width="match_parent"
-              android:id="@+id/tv_player_2"
-              android:layout_height="50dp"
-              android:gravity="center"
-              android:layout_below="@id/view_line"
-              android:textSize="25sp"
-              android:textColor="@android:color/black"
-              android:text="@string/player"
-              android:layout_marginTop="10dp"
-    />
-
-
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@id/ll_btm"
-            android:text="@string/choose_your_move"
-            android:textSize="25sp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="20dp"
-            android:textColor="@android:color/white"/>
-
-    <LinearLayout
-            android:id="@+id/ll_btm"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="@dimen/padding_parent"
-            android:layout_alignParentBottom="true">
-        <ImageView android:layout_width="0dp"
-                   android:layout_weight="1"
-                   android:layout_height="70dp"
-                   android:src="@drawable/rock"/>
-        <ImageView android:layout_width="0dp"
-                   android:layout_weight="1"
-                   android:layout_height="70dp"
-                   android:src="@drawable/paper"/>
-        <ImageView android:layout_width="0dp"
-                   android:layout_weight="1"
-                   android:layout_height="70dp"
-                   android:src="@drawable/scissor"/>
-
-    </LinearLayout>
-
-</RelativeLayout>
+</FrameLayout>
