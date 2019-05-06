@@ -10,52 +10,113 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
 import com.demo.rock.R
+import com.demo.rock.di.injector.Injector
 import com.demo.rock.game.Action
 import com.demo.rock.game.GameEngine
+import com.demo.rock.ui.contracts.ResultContract
+import com.demo.rock.ui.presenters.ResultPresenter
 import com.demo.rock.util.*
+import javax.inject.Inject
 
-class ResultActivity : AppCompatActivity() {
+class ResultActivity : AppCompatActivity(), ResultContract.View {
+
     @BindView(R.id.tv_result)
     lateinit var mTv: TextView
 
     @BindView(R.id.iv_move_1)
-    lateinit var mIv1:ImageView
+    lateinit var mIv1: ImageView
 
     @BindView(R.id.iv_move_2)
-    lateinit var mIv2:ImageView
+    lateinit var mIv2: ImageView
+
+    lateinit var mGameType: String
+    lateinit var result: GameEngine.Result
+    lateinit var move1: Action
+    lateinit var move2: Action
+
+    @Inject
+    lateinit var presenter: ResultPresenter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result)
+        // butterknife init
         ButterKnife.bind(this)
+        // dagger init
+        val injector = Injector()
+        injector.getActivityComponent().inject(this)
+
+
         val bundle = intent.extras
-        val result: GameEngine.Result = bundle.getSerializable(KEY_RESULT) as GameEngine.Result
-        val mGameType = bundle.getString(KEY_GAME_TYPE)
-        setMessage(result.name, mGameType)
+        result = bundle!!.getSerializable(KEY_RESULT) as GameEngine.Result
+        mGameType = bundle!!.getString(KEY_GAME_TYPE)
 
-        val move1:Action = bundle.getSerializable(KEY_PLAYER1_MOVE) as Action
-        setImage(move1, mIv1)
+        // player 1 move
+        move1 = bundle.getSerializable(KEY_PLAYER1_MOVE) as Action
+        // player 2 move
+        move2 = bundle.getSerializable(KEY_PLAYER2_MOVE) as Action
 
-        val move2:Action = bundle.getSerializable(KEY_PLAYER2_MOVE) as Action
-        setImage(move2, mIv2)
+        presenter.bindView(this)
+        presenter.start()
 
     }
 
-    private fun setMessage(name: String, mGameType: String?) {
-        if(mGameType!!.compareTo(TYPE_COMPUTER_COMPUTER) == 0){
-           mTv.text = "Bot 1" + name
-        } else {
-            mTv.text = "You "+name
+    override fun setMessage(result: String, mGameType: String) {
+        var text: String
+        when(mGameType!!.compareTo(TYPE_COMPUTER_COMPUTER) == 0){
+            true ->  text = getString(R.string.bot_1)
+            false -> text = getString(R.string.you)
+        }
+
+        mTv.text = text.plus(getString(R.string.space)).plus(result)
+    }
+
+    override fun setImage(action1: Action, action2: Action) {
+        when (action1) {
+            Action.SCISSOR -> mIv1.setImageResource(R.drawable.scissor)
+            Action.ROCK -> mIv1.setImageResource(R.drawable.rock)
+            Action.PAPER -> mIv1.setImageResource(R.drawable.paper)
+        }
+
+        when (action2) {
+            Action.SCISSOR -> mIv2.setImageResource(R.drawable.scissor)
+            Action.ROCK -> mIv2.setImageResource(R.drawable.rock)
+            Action.PAPER -> mIv2.setImageResource(R.drawable.paper)
         }
     }
 
-    private fun setImage(action: Action, iv: ImageView) {
-        when(action){
-            Action.SCISSOR -> iv.setImageResource(R.drawable.scissor)
-            Action.ROCK -> iv.setImageResource(R.drawable.rock)
-            Action.PAPER -> iv.setImageResource(R.drawable.paper)
-        }
+
+    override fun getGameType(): String {
+        return mGameType
+    }
+
+    override fun getPlayer1Move(): Action {
+        return move1
+    }
+
+    override fun getPlayer2Move(): Action {
+        return move2
+    }
+
+    override fun getResult(): String {
+        return result.name
+    }
+
+    override fun showProgress() {
+        // stub method not useful here
+    }
+
+    override fun hideProgress() {
+        // stub method not useful here
+    }
+
+    override fun message(msg: String) {
+        // stub method not useful here
+    }
+
+    override fun onBackPressed() {
+        // Nothing to do let user uses buttons
     }
 
     @OnClick(R.id.btn_play)
@@ -71,7 +132,5 @@ class ResultActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    override fun onBackPressed() {
-        // Nothing to do let user uses buttons
-    }
+
 }

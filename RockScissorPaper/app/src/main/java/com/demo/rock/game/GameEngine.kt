@@ -18,7 +18,7 @@ class GameEngine {
     }
 
     fun checkWithPaper(player2: Action): Result {
-        var result: Result
+        val result: Result
         if (player2 == Action.PAPER) {
             result = Result.DRAW
         } else if (player2 == Action.ROCK) {
@@ -30,7 +30,7 @@ class GameEngine {
     }
 
     fun checkWithScissor(player2: Action): Result {
-        var result: Result
+        val result: Result
         if (player2 == Action.SCISSOR) {
             result = Result.DRAW
         } else if (player2 == Action.PAPER) {
@@ -42,7 +42,7 @@ class GameEngine {
     }
 
     fun checkWithRock(player2: Action): Result {
-        var result: Result
+        val result: Result
         if (player2 == Action.ROCK) {
             result = Result.DRAW
         } else if (player2 == Action.SCISSOR) {

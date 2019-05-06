@@ -10,4 +10,7 @@
     <string name="computer_2">Computer 2</string>
     <string name="play_again">Play again!</string>
     <string name="change_mode">Change mode</string>
+    <string name="bot_1">Bot1 </string>
+    <string name="you">You </string>
+    <string name="space">&#160;</string>
 </resources>
