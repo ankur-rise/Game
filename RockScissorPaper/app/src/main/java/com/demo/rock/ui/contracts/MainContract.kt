@@ -4,6 +4,6 @@ import com.demo.rock.ui.base.IBaseView
 
 interface MainContract {
     interface View:IBaseView{
-        fun openGameActivity()
+        fun openGameActivity(type:String)
     }
 }

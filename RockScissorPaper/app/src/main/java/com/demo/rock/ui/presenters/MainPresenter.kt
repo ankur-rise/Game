@@ -7,6 +7,10 @@ import javax.inject.Inject
 class MainPresenter @Inject constructor() : BasePresenter<MainContract.View>() {
 
     override fun start() {
+        // nothing to init for this presenter
+    }
 
+    fun handleClick(type: String) {
+        mView?.openGameActivity(type)
     }
 }

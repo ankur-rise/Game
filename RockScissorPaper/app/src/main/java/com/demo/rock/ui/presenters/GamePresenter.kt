@@ -75,6 +75,7 @@ class GamePresenter @Inject constructor() : BasePresenter<GameContract.View>() {
 
     fun releaseHandler() {
         bot1?.clear()
-        bot2?.clear()
+        if(::bot2.isInitialized)
+        bot2.clear()
     }
 }

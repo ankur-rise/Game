@@ -65,6 +65,7 @@ class GameActivity : AppCompatActivity(), GameContract.View {
     override fun showResult(result: GameEngine.Result, action1: Action, action2: Action) {
         val intent = Intent(this, ResultActivity::class.java)
         val bundle = Bundle()
+        bundle.putString(KEY_GAME_TYPE, mGameType)
         bundle.putSerializable(KEY_RESULT, result)
         bundle.putSerializable(KEY_PLAYER1_MOVE, action1)
         bundle.putSerializable(KEY_PLAYER2_MOVE, action2)

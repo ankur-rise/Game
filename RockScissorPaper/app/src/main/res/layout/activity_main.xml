@@ -19,7 +19,6 @@
                   android:orientation="vertical"
                   android:layout_centerInParent="true">
         <TextView android:id="@+id/tv_pl_co"
-                  android:onClick="onPlayerComputer"
                   android:layout_width="match_parent"
                   android:layout_height="@dimen/block_height_normal"
                   android:background="@color/colorAccent"
@@ -34,7 +33,6 @@
                   android:background="@color/colorAccent"
                   android:text="@string/computer_computer"
                   android:gravity="center"
-                  android:onClick="onComputerComputer"
                   android:layout_marginTop="@dimen/margin_parent"
         />
     </LinearLayout>
