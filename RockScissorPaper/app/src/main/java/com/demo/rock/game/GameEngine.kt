@@ -1,10 +1,11 @@
 package com.demo.rock.game
 
-class GameEngine {
+class GameEngine constructor(str: String) {
     enum class Result {
         DRAW, WIN, LOOSE
     }
 
+    var name: String = str
     fun isWinner(player1: Action, player2: Action): Result {
 
         if (player1 == Action.ROCK) {

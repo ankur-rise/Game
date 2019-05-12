@@ -1,5 +1,6 @@
 package com.demo.rock.ui.presenters
 
+import android.util.Log
 import com.demo.rock.game.Action
 import com.demo.rock.game.Bot
 import com.demo.rock.game.GameEngine
@@ -9,11 +10,11 @@ import com.demo.rock.ui.contracts.GameContract
 import com.demo.rock.util.TYPE_COMPUTER_COMPUTER
 import javax.inject.Inject
 
-class GamePresenter @Inject constructor() : BasePresenter<GameContract.View>() {
+class GamePresenter @Inject constructor(game:GameEngine) : BasePresenter<GameContract.View>() {
     private lateinit var bot1: IBot
     private lateinit var bot2: IBot
     private lateinit var mHumanAction: Action
-    private val mGameEngine = GameEngine()
+    private val mGameEngine = game
 
 
     override fun start() {
@@ -24,6 +25,9 @@ class GamePresenter @Inject constructor() : BasePresenter<GameContract.View>() {
         } else {
             startComputerPlayer1()
         }
+
+        Log.i(GamePresenter::class.java.simpleName, mGameEngine.name)
+
     }
 
     private fun startComputerPlayer1() {

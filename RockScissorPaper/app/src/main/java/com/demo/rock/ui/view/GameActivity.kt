@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -46,7 +47,11 @@ class GameActivity : AppCompatActivity(), GameContract.View {
         setContentView(R.layout.activity_game)
         supportActionBar?.hide()
         ButterKnife.bind(this)
-        Injector().getActivityComponent().inject(this)
+        var compo = Injector().getActivityComponent()
+        compo.inject(this)
+        var gameengine = compo.getGameEngine()
+        Log.i(GameActivity::class.java.simpleName, gameengine.name)
+
         mPresenter.bindView(this)
         val bundle = intent.extras
         mGameType = bundle.getString(KEY_GAME_TYPE)
