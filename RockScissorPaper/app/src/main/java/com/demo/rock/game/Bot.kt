@@ -5,14 +5,20 @@ import android.os.HandlerThread
 import android.os.Looper
 
 /** This class instance will work as separate computer player */
-class Bot : IBot {
+class Bot(list:List<Action>, boundry:Int) : IBot {
+    val mList = list
+    val boundry = boundry
     override fun clear() {
         mHandlerThread.quitSafely()
     }
 
     companion object {
         fun getInstance(): IBot {
-            return Bot()
+            val list = ArrayList<Action>()
+            list.add(Action.ROCK)
+            list.add(Action.SCISSOR)
+            list.add(Action.PAPER)
+            return Bot(list, 2)
         }
     }
 
@@ -28,26 +34,14 @@ class Bot : IBot {
 
     override fun getAction(callback: IBot.Callback) {
         mWorkerHandler.postDelayed({
-            val action = getAction(getRandomIndex())
+            val action = mList.get(getRandomIndex(boundry))
             mMainHandler.post { callback.onAction(action) }
         }, 3000)
 
     }
 
-    fun getRandomIndex(): Int {
-        return (Math.random() * 3).toInt()
-    }
-
-    fun getAction(i: Int): Action {
-        var action: Action
-        if (i == 0) {
-            action = Action.ROCK
-        } else if (i == 1) {
-            action = Action.PAPER
-        } else {
-            action = Action.SCISSOR
-        }
-        return action
+    fun getRandomIndex(booundry:Int): Int {
+        return (Math.random() * booundry).toInt()
     }
 
 }

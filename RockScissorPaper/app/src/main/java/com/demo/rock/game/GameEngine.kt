@@ -1,57 +1,28 @@
 package com.demo.rock.game
 
 class GameEngine constructor(str: String) {
+    var map = HashMap<Action,Action>()
+
+    init {
+        map.put(Action.SCISSOR, Action.PAPER)
+        map.put(Action.PAPER, Action.ROCK)
+        map.put(Action.ROCK, Action.SCISSOR)
+    }
     enum class Result {
         DRAW, WIN, LOOSE
     }
 
     var name: String = str
-    fun isWinner(player1: Action, player2: Action): Result {
-
-        if (player1 == Action.ROCK) {
-            return checkWithRock(player2)
-        } else if (player1 == Action.SCISSOR) {
-            return checkWithScissor(player2)
+    fun isFirstActionWin(player1: Action, player2: Action): Result {
+        val winCon = map.get(player1)
+        if(winCon == player2) {
+            return Result.WIN
+        } else if(map.get(player2) == player1){
+            return Result.LOOSE
         } else {
-            return checkWithPaper(player2)
+            return Result.DRAW
         }
+      }
 
-    }
-
-    fun checkWithPaper(player2: Action): Result {
-        val result: Result
-        if (player2 == Action.PAPER) {
-            result = Result.DRAW
-        } else if (player2 == Action.ROCK) {
-            result = Result.WIN
-        } else {
-            result = Result.LOOSE
-        }
-        return result
-    }
-
-    fun checkWithScissor(player2: Action): Result {
-        val result: Result
-        if (player2 == Action.SCISSOR) {
-            result = Result.DRAW
-        } else if (player2 == Action.PAPER) {
-            result = Result.WIN
-        } else {
-            result = Result.LOOSE
-        }
-        return result
-    }
-
-    fun checkWithRock(player2: Action): Result {
-        val result: Result
-        if (player2 == Action.ROCK) {
-            result = Result.DRAW
-        } else if (player2 == Action.SCISSOR) {
-            result = Result.WIN
-        } else {
-            result = Result.LOOSE
-        }
-        return result
-    }
 
 }

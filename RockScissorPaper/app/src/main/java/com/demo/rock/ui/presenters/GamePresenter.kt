@@ -16,8 +16,8 @@ class GamePresenter @Inject constructor(game:GameEngine) : BasePresenter<GameCon
     private lateinit var mHumanAction: Action
     private val mGameEngine = game
 
-
     override fun start() {
+
         if (mView!!.typeOfGame().compareTo(TYPE_COMPUTER_COMPUTER) == 0) {
             startComputerPlayer1()
             startComputerPlayer2()
@@ -44,7 +44,7 @@ class GamePresenter @Inject constructor(game:GameEngine) : BasePresenter<GameCon
         bot1.getAction(object : IBot.Callback {
             override fun onAction(botAction: Action) {
                 if (mView!!.typeOfGame().compareTo(TYPE_COMPUTER_COMPUTER) == 0) {
-                    mView?.hideProgress()
+                    mView!!.hideProgress()
                     getSecondComputerMove(botAction)
                 } else {
                     resultHumanComputer(botAction)
@@ -58,28 +58,32 @@ class GamePresenter @Inject constructor(game:GameEngine) : BasePresenter<GameCon
         mView?.setProgressMessage("Second bot in progress...")
         bot2.getAction(object : IBot.Callback {
             override fun onAction(botAction: Action) {
-                val result = mGameEngine.isWinner(action1, botAction)
-                mView?.hideProgress()
-                mView?.showResult(result, action1, botAction)
+                val result = mGameEngine.isFirstActionWin(action1, botAction)
+                mView!!.hideProgress()
+                mView!!.showResult(result, action1, botAction)
             }
         })
     }
 
     private fun resultHumanComputer(botAction: Action) {
-        val result = mGameEngine.isWinner(mHumanAction, botAction)
-        mView?.hideProgress()
-        mView?.showHumanMove()
-        mView?.showResult(result, botAction, mHumanAction)
+        val result = mGameEngine.isFirstActionWin(mHumanAction, botAction)
+        mView!!.hideProgress()
+        mView!!.showHumanMove()
+        mView!!.showResult(result, botAction, mHumanAction)
     }
 
     fun humanMove(action: Action) {
         mHumanAction = action
-        mView?.hideHumanMove()
+        mView!!.hideHumanMove()
     }
 
     fun releaseHandler() {
         bot1?.clear()
         if(::bot2.isInitialized)
         bot2.clear()
+    }
+
+    fun clear() {
+        mView = null
     }
 }

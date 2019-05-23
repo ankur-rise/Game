@@ -42,6 +42,7 @@ class GameActivity : AppCompatActivity(), GameContract.View {
     lateinit var mTvProgress: TextView
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
@@ -58,6 +59,10 @@ class GameActivity : AppCompatActivity(), GameContract.View {
         mPresenter.start()
 
     }
+
+
+
+
 
     override fun showHumanMove() {
         mTvHumanMove.visibility = View.VISIBLE
@@ -127,11 +132,18 @@ class GameActivity : AppCompatActivity(), GameContract.View {
         mPresenter.humanMove(Action.SCISSOR)
         mTvHumanMove.visibility = View.GONE
         mPresenter.getComputerMove()
+
+    }
+
+    override fun onContentChanged() {
+        super.onContentChanged()
+        Log.i(GameActivity::class.java.simpleName, "onConfigChanged")
     }
 
     override fun onDestroy() {
         super.onDestroy()
         mPresenter.releaseHandler()
+        mPresenter.clear()
     }
 
 }
